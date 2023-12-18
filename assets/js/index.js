@@ -24,7 +24,7 @@ let tareas = [
 {
 
     id:"01",
-    name:"caminar",
+    name:"Silvar",
     done:false
 
 },
@@ -32,7 +32,7 @@ let tareas = [
 {
 
     id:"02",
-    name:"correr",
+    name:"Correr",
     done:true
 
 },
@@ -56,7 +56,7 @@ const renderlitask = (id, name, done) => (
 <pan>${done}</pan>,
 
 <input id="chkbx" type="checkbox" onclick="markasdonetask('${id}')">${done ? "Marcar como no realizada":"Marcar como Realizada" }</input>
-<button type="button" class="btn-close text-danger" aria-label="Close" onclick="deletetask('${name}')"></button>
+<button type="button" class="btn-close text-danger" aria-label="Close" onclick="deletetask('${id}')"></button>
 
 </li>`
 )
@@ -88,10 +88,11 @@ alert("El campo está vacío")
 btnadd.addEventListener('click', addtask)
 
 // Función para eliminar tarea
-const deletetask =(nametaskdelete)=>{
-
-tareas = tareas.filter((tarea) => tarea.name != nametaskdelete) 
+const deletetask =(idtaskdelete)=>{
+    if(confirm("Está seguro que desea eliminar esta tarea?")){
+tareas = tareas.filter((tarea) => tarea.id != idtaskdelete) 
 rendertask()
+    }
 
 }
 
@@ -115,8 +116,7 @@ rendertask()
 // Función para renderizar tareas en form
 
 const rendertask = () =>{
-
-    // alert("estiy dentro de rendeertask")
+// alert("estiy dentro de rendeertask")
 tareas = tareas.sort((a,b) => a.name.localeCompare(b.name));
 ultask.innerHTML=""
 for (mytask in tareas){
